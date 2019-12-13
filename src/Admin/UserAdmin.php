@@ -43,4 +43,13 @@ final class UserAdmin extends AbstractAdmin {
             : 'User'; // shown in the breadcrumb on the create view
     }
 
+    public function prePersist($object) { // $object is an instance of App\Entity\User as specified in services.yaml
+        $plainPassword = $object->getPassword();
+        $container = $this->getConfigurationPool()->getContainer();
+        $encoder = $container->get('security.password_encoder');
+        $encoded = $encoder->encodePassword($object, $plainPassword);
+
+        $object->setPassword($encoded);
+    }
+
 }
