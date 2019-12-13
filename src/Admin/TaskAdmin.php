@@ -39,7 +39,7 @@ final class TaskAdmin extends AbstractAdmin {
     {
         $listMapper
             ->addIdentifier('name')
-            ->addIdentifier('id');
+            ->addIdentifier('assigned.email');
     }
 
     public function toString($object)
